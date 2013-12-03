@@ -1,0 +1,25 @@
+CROSS_HOST="x86_64-w64-mingw32"
+inherit cross
+
+NAME="mingw64-x86_64-libkate"
+VERSION=0.4.1
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="Ogg karaoke/text encapsulation codec for Win64 toolchain"
+DESCRIPTION="Kate is a codec for karaoke and text encapsulation for Ogg. Most
+of the time, this would be multiplexed with audio/video to carry subtitles,
+song lyrics (with or without karaoke data), etc, but doesn't have to be."
+HOMEPAGE="http://wiki.xiph.org/index.php/OggKate"
+SRC_URI="http://libkate.googlecode.com/files/libkate-${VERSION}.tar.gz"
+SRC_DIR="libkate-${VERSION}"
+
+DISTCLEANFILES="doc/Makefile doc/kate.doxygen"
+
+src_install() {
+	cd ${B}
+	cyginstall bin_PROGRAMS= man_MANS=
+
+	rm -f ${D}${CROSS_BINDIR}/KateDJ
+	rm -fr ${D}${CROSS_LIBDIR}/python*
+	rm -fr ${D}/usr/share/doc/${NAME}/html/
+}
